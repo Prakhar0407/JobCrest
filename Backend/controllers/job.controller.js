@@ -6,17 +6,18 @@ export const postJob = async (req, res) => {
         const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
         const userId = req.id;
 
-        if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+        if (!title || !companyId) {
             return res.status(400).json({
-                message: "Somethin is missing.",
+                message: "Title and Company are required.",
                 success: false
-            })
-        };
+            });
+        }
+
         const job = await Job.create({
             title,
-            description,
-            requirements: requirements.split(","),
-            salary: Number(salary),
+            description: description || "",
+            requirements: requirements ? requirements.split(",") : [],
+            salary: salary ? Number(salary) : undefined,
             location,
             jobType,
             experienceLevel: experience,
@@ -24,6 +25,7 @@ export const postJob = async (req, res) => {
             company: companyId,
             created_by: userId
         });
+
         return res.status(201).json({
             message: "New job created successfully.",
             job,
@@ -31,8 +33,13 @@ export const postJob = async (req, res) => {
         });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Server error while creating job.",
+            success: false
+        });
     }
-}
+};
+
 
 export const getAllJobs = async (req, res) => {
     try {

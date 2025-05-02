@@ -78,10 +78,10 @@ const PostJob = () => {
         <form onSubmit={submitHandler} style={styles.form}>
           <div style={styles.gridContainer}>
             {[
-              { label: "Title", name: "title" },
+              { label: "Title *", name: "title" },
               { label: "Description", name: "description" },
               { label: "Requirements", name: "requirements" },
-              { label: "Salary/Stipend", name: "salary" },
+              { label: "Salary/Stipend(LPA)", name: "salary" },
               { label: "Location", name: "location" },
               { label: "Job Type", name: "jobType" },
               { label: "Experience(in years)", name: "experience" },
@@ -102,7 +102,7 @@ const PostJob = () => {
             {companies.length > 0 && (
               <Select onValueChange={selectChangeHandler}>
                 <SelectTrigger style={styles.selectTrigger}>
-                  <SelectValue placeholder="Select a Company" />
+                  <SelectValue placeholder="Select a Company *" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>

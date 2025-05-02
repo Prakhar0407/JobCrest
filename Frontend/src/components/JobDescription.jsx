@@ -55,9 +55,16 @@ const JobDescription = () => {
                 <div>
                     <h1 className="job-title">{singleJob?.title}</h1>
                     <div className="badge-container">
-                        <Badge className="badge badge-primary">{singleJob?.postion} Positions</Badge>
-                        <Badge className="badge badge-secondary">{singleJob?.jobType}</Badge>
-                        <Badge className="badge badge-accent">{singleJob?.salary} LPA</Badge>
+                        {/* Conditionally render badges */}
+                        {singleJob?.postion && (
+                            <Badge className="badge badge-primary">{singleJob?.postion} Positions</Badge>
+                        )}
+                        {singleJob?.jobType && (
+                            <Badge className="badge badge-secondary">{singleJob?.jobType}</Badge>
+                        )}
+                        {singleJob?.salary && (
+                            <Badge className="badge badge-accent">{singleJob?.salary} LPA</Badge>
+                        )}
                     </div>
                 </div>
                 <Button
@@ -72,10 +79,24 @@ const JobDescription = () => {
             <h1 className="section-title">Job Description</h1>
             <div className="job-details">
                 <h1><span className="label">Role:</span> {singleJob?.title}</h1>
-                <h1><span className="label">Location:</span> {singleJob?.location}</h1>
-                <h1><span className="label">Description:</span> {singleJob?.description}</h1>
-                <h1><span className="label">Experience:</span> {singleJob?.experience} yrs</h1>
-                <h1><span className="label">Salary:</span> {singleJob?.salary} LPA</h1>
+
+                {/* Conditionally render Location */}
+                {singleJob?.location && (
+                    <h1><span className="label">Location:</span> {singleJob?.location}</h1>
+                )}
+
+                {/* Conditionally render Description */}
+                {singleJob?.description && (
+                    <h1><span className="label">Description:</span> {singleJob?.description}</h1>
+                )}
+
+                <h1><span className="label">Experience:</span> {singleJob?.experience || 0} yrs</h1>
+
+                {/* Conditionally render Salary */}
+                {singleJob?.salary && (
+                    <h1><span className="label">Salary:</span> {singleJob?.salary} LPA</h1>
+                )}
+
                 <h1><span className="label">Total Applicants:</span> {singleJob?.applications?.length}</h1>
                 <h1><span className="label">Posted Date:</span> {singleJob?.createdAt.split("T")[0]}</h1>
             </div>
